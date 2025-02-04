@@ -9,6 +9,7 @@ import Contact from './pages/Contact.jsx';
 import Careers from './pages/Careers.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 import Footer from './components/layout/Footer.jsx';
+import './index.css'
 
 function App() {
   return (
