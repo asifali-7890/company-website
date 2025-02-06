@@ -37,8 +37,8 @@ const images = [
 
 const ImageSwiper = () => {
     return (
-        <div className="my-10 flex justify-center items-center w-full mx-auto flex-col">
-            <h2 className="text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+        <div className="flex justify-center items-center w-full mx-auto flex-col">
+            <h2 className="pt-20 text-3xl font-bold text-center mb-8">Our Portfolio</h2>
             <div className="flex justify-center items-center w-full">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]} // Register required modules

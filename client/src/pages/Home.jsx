@@ -7,6 +7,7 @@ import Services from "../components/layout/Services.JSX"
 import Stats from "../components/layout/Stats"
 import VideoBackground from "../components/layout/VideoBackground"
 import WhyBlueNext from "../components/layout/WhyBlueNext.JSX"
+import ContactUs from "./ContactUs"
 import CustomerReviews from "./CustomerReviews"
 
 
@@ -23,6 +24,7 @@ const Home = () => {
             <ImageSwiper />
             <PricingSection />
             <CustomerReviews />
+            <ContactUs />
         </div>
     )
 }

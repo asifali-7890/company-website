@@ -27,7 +27,7 @@ const CareersSection = () => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(true)}
                     className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full 
-          font-semibold text-lg hover:shadow-lg transition-all duration-300 inline-flex items-center"
+                            font-semibold text-lg hover:shadow-lg transition-all duration-300 inline-flex items-center"
                 >
                     <BriefcaseIcon className="w-6 h-6 mr-2" />
                     Apply for Open Positions

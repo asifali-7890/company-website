@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import React from 'react';
 import { FaLaptopCode, FaSearch, FaMobileAlt, FaChartLine, FaPaintBrush, FaCogs } from 'react-icons/fa';
 
 const Services = () => {
@@ -41,26 +43,76 @@ const Services = () => {
     ];
 
     return (
-        <div className="container mx-auto p-6">
-            <h2 className="text-3xl font-bold text-center mb-8">Services We Offer</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {services.map((service, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-transform transform hover:-translate-y-1 ease-in-out duration-300">
-                        <div className="flex justify-center items-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-                            {service.icon}
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
-                        <p className="text-gray-600 mb-4">{service.description}</p>
-                        <a
-                            href="#"
-                            className="text-blue-600 font-semibold hover:underline"
+        <section style={{ marginBottom: "10px" }} className="relative py-20 bg-gradient-to-br from-blue-900 to-purple-900 overflow-hidden">
+            <div className="container mx-auto px-4" >
+                {/* Decorative background elements */}
+                <div className="absolute -top-20 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-4xl font-bold text-white mb-4">
+                        Our Premium Services
+                    </h2>
+                    <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                        Transform your digital presence with our comprehensive suite of professional services
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {services.map((service, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="group relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/10 transition-all duration-300"
                         >
-                            {service.planLink}
-                        </a>
-                    </div>
-                ))}
+                            {/* Hover border animation */}
+                            <div className="absolute inset-0 border-2 border-white/10 rounded-2xl group-hover:border-blue-400/30 transition-colors" />
+
+                            <div className="flex flex-col items-center text-center">
+                                {/* Icon container with gradient */}
+                                <div className="mb-6 p-4 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl">
+                                    {React.cloneElement(service.icon, {
+                                        className: 'text-4xl text-white'
+                                    })}
+                                </div>
+
+                                <h3 className="text-2xl font-bold text-white mb-4">
+                                    {service.title}
+                                </h3>
+                                <p className="text-blue-200 mb-6 leading-relaxed">
+                                    {service.description}
+                                </p>
+                                <a
+                                    href="#"
+                                    className="hidden items-center text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+                                >
+                                    {service.planLink}
+                                    <svg
+                                        className="ml-2 w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M9 5l7 7-7 7"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

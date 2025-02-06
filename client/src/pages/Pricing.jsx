@@ -1,8 +1,12 @@
-import React from 'react'
+import PricingSection from '../components/layout/PricingSection'
+import ContactUs from './ContactUs'
 
 const Pricing = () => {
     return (
-        <div>Pricing</div>
+        <>
+            <PricingSection />
+            <ContactUs />
+        </>
     )
 }
 

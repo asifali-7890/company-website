@@ -5,12 +5,11 @@ import Services from './pages/Services.jsx';
 import Portfolio from './pages/Portfolio.jsx';
 import Pricing from './pages/Pricing.jsx';
 import Reviews from './pages/Reviews.jsx';
-import Contact from './pages/Contact.jsx';
+import Contact from './pages/ContactUs.jsx';
 import Careers from './pages/Careers.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 import Footer from './components/layout/Footer.jsx';
 import './index.css'
-
 function App() {
   return (
     <Router>

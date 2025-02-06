@@ -1,8 +1,15 @@
-import React from 'react'
+
+import ImageSwiper from '../components/layout/ImageSwiper'
+import ContactUs from './ContactUs'
+import CustomerReviews from './CustomerReviews'
 
 const Portfolio = () => {
     return (
-        <div>Portfolio</div>
+        <>
+            <ImageSwiper />
+            <CustomerReviews />
+            <ContactUs />
+        </>
     )
 }
 
