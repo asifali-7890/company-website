@@ -55,7 +55,7 @@ const Footer = () => (
                     <ul className="space-y-2">
                         <li>
                             <a
-                                href="https://www.linkedin.com"
+                                href="https://www.linkedin.com/in/asifaliquraishy/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-white transition-colors"

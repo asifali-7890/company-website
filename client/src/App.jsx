@@ -9,6 +9,7 @@ import Contact from './pages/ContactUs.jsx';
 import Careers from './pages/Careers.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 import Footer from './components/layout/Footer.jsx';
+import PrivacyPolicy from './components/layout/DataPolicy.jsx';
 import './index.css'
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </Router>
