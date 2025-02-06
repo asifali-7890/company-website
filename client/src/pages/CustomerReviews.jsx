@@ -228,7 +228,8 @@ const CustomerReviews = () => {
                 sx={{
                     maxWidth: 1280,
                     mx: 'auto',
-                    mt: 4
+                    mt: 4,
+                    overflow: 'hidden'
                 }}
             >
                 {reviews.map((review, index) => (

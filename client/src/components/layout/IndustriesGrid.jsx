@@ -17,7 +17,7 @@ const industries = [
 
 const IndustriesGrid = () => {
     return (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto p-6 overflow-hidden">
             <h2 className="text-3xl font-bold text-center mb-8">Our Expertise Across Industries</h2>
             <p className="text-center mb-12">This image represents our expertise over the global market.</p>
 
