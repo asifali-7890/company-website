@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { motion } from 'framer-motion';
 
 // Import all images
 import img1 from "../../assets/images/portfolio1.jpg";
@@ -38,7 +39,13 @@ const images = [
 const ImageSwiper = () => {
     return (
         <div className="flex justify-center items-center w-full mx-auto flex-col">
-            <h2 className="pt-20 text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+            <motion.h2
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-4xl font-bold text-gray-900 mb-4"
+            >
+                <h2 className="pt-20 text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+            </motion.h2>
             <div className="flex justify-center items-center w-full">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]} // Register required modules

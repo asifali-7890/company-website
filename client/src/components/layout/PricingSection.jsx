@@ -1,10 +1,11 @@
+
 import { motion } from 'framer-motion';
 import React from 'react';
 import { CheckCircle, Globe, CreditCard, Server, MapPin, ShoppingCart, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PricingSection = () => {
-    // Keep your existing pricingPlans and seoPlans arrays
+    // Pricing plans data remains the same
 
     const pricingPlans = [
         {
@@ -132,68 +133,63 @@ const PricingSection = () => {
         },
     ];
 
-
     const PricingCard = ({ name, price, description, features, icon }) => (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="group relative p-8 bg-white/5 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+            transition={{ duration: 0.3 }}
+            className="group relative p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100"
         >
-            <div className="absolute inset-0 border-2 border-white/10 rounded-2xl group-hover:border-blue-300/30 transition-colors" />
-
             <div className="flex flex-col items-center text-center">
-                <div className="mb-6 p-4 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full">
-                    {React.cloneElement(icon, { size: 40, className: 'text-white' })}
+                <div className="mb-4 p-3 bg-blue-100 rounded-lg text-blue-600">
+                    {React.cloneElement(icon, { size: 28, className: 'text-current' })}
                 </div>
 
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{name}</h3>
-                <p className="text-3xl font-extrabold text-blue-600 mb-4">{price}</p>
-                <p className="text-gray-500 mb-6 text-sm">{description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-1">{name}</h3>
+                <p className="text-2xl font-bold text-gray-800 mb-3">{price}</p>
+                <p className="text-gray-600 text-sm mb-4">{description}</p>
 
-                <ul className="w-full space-y-3 mb-8">
+                <ul className="w-full space-y-2.5 mb-6">
                     {features.map((feature, index) => (
                         <motion.li
                             key={index}
                             whileHover={{ x: 5 }}
-                            className="flex items-center p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
+                            className="flex items-start p-2.5 text-sm rounded-lg hover:bg-gray-50 transition-colors"
                         >
-                            <CheckCircle className="w-5 h-5 text-green-400 mr-3" />
-                            <span className="text-gray-700">{feature}</span>
+                            <CheckCircle className="w-4 h-4 text-blue-500 mt-0.5 mr-2 flex-shrink-0" />
+                            <span className="text-gray-700 text-left">{feature}</span>
                         </motion.li>
                     ))}
                 </ul>
 
-
-                <Link to="/contact" className='w-full'>
-                    <button className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all transform hover:-translate-y-1">
+                <Link to="/contact" className="w-full">
+                    <button className="w-full py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
                         Get Started
                     </button>
                 </Link>
-
             </div>
         </motion.div>
     );
 
     return (
-        <section className="relative py-20 bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
+        <section className="relative py-20 bg-gray-50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
                     <motion.h2
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-4xl font-bold text-gray-900 mb-4"
+                        className="text-3xl font-bold text-gray-900 mb-3"
                     >
-                        Transparent Pricing Plans
+                        Transparent Pricing
                     </motion.h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Choose the perfect plan for your business needs with our flexible pricing options
+                    <p className="text-gray-600 max-w-xl mx-auto">
+                        Flexible plans tailored to your business requirements
                     </p>
                 </div>
 
-                <div className="mb-20">
-                    <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">Website Development</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="mb-14">
+                    <h3 className="text-xl font-semibold text-center mb-6 text-gray-800">Website Development</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {pricingPlans.map((plan, index) => (
                             <PricingCard key={index} {...plan} />
                         ))}
@@ -201,8 +197,8 @@ const PricingSection = () => {
                 </div>
 
                 <div>
-                    <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">SEO Services</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <h3 className="text-xl font-semibold text-center mb-6 text-gray-800">SEO Services</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {seoPlans.map((plan, index) => (
                             <PricingCard key={index} {...plan} />
                         ))}
@@ -210,9 +206,9 @@ const PricingSection = () => {
                 </div>
 
                 {/* Decorative elements */}
-                <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                    <div className="absolute -top-20 -left-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl" />
-                    <div className="absolute -top-40 right-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-0 left-0 w-48 h-48 bg-blue-100/30 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-0 w-48 h-48 bg-blue-100/30 rounded-full blur-3xl" />
                 </div>
             </div>
         </section>

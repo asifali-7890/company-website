@@ -10,6 +10,7 @@ import {
     UserGroupIcon,
     SparklesIcon
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 import ServicesShowcase from './ServicesShowcase';
 import ContactUs from './ContactUs';
 import { Link } from 'react-router-dom';
@@ -72,19 +73,27 @@ const Services = () => {
         <>
             <section className="relative py-20 bg-gradient-to-br from-indigo-900 to-purple-800 overflow-hidden">
                 <div className="container mx-auto px-4">
-                    <div className="text-center mb-20">
-                        <span className="text-blue-300 font-semibold uppercase tracking-wide">
-                            Digital Necessity
-                        </span>
-                        <h2 className="mt-4 text-4xl font-bold text-white">
-                            Why Your Business Needs a Website
-                        </h2>
-                        <div className="mt-2 relative max-w-2xl mx-auto">
-                            <p className="text-xl text-indigo-100">
-                                In the digital age, your website is your most powerful business asset
-                            </p>
+
+
+                    <motion.h2
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        <div className="text-center mb-20">
+                            <span className="text-blue-300 font-semibold uppercase tracking-wide">
+                                Digital Necessity
+                            </span>
+                            <h2 className="mt-4 text-4xl font-bold text-white">
+                                Why Your Business Needs a Website
+                            </h2>
+                            <div className="mt-2 relative max-w-2xl mx-auto">
+                                <p className="text-xl text-indigo-100">
+                                    In the digital age, your website is your most powerful business asset
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </motion.h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {features.map((feature, index) => (

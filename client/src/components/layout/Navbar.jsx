@@ -10,14 +10,18 @@ const Navbar = () => {
     const closeMenu = () => setIsOpen(false);
 
     return (
-        <nav className="fixed w-full z-50  backdrop-blur-md shadow-sm mb-6">
+        <nav className="fixed w-full z-50 backdrop-blur-lg bg-white/80 shadow-lg border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
-                    {/* Logo */}
+                    {/* Logo with hover effect */}
                     <div className="flex-shrink-0">
-                        <Link to="/" onClick={closeMenu} className="flex items-center">
+                        <Link
+                            to="/"
+                            onClick={closeMenu}
+                            className="flex items-center group"
+                        >
                             <img
-                                className="h-12 w-auto transition-transform hover:scale-105"
+                                className="h-14 w-auto transition-all duration-500 hover:scale-105 hover:drop-shadow-lg"
                                 src={logo}
                                 alt="BlueNext Technologies"
                                 style={{ filter: 'brightness(0)' }}
@@ -26,7 +30,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex md:items-center space-x-6">
+                    <div className="hidden md:flex md:items-center space-x-8">
                         {[
                             { to: "/", text: "Home" },
                             { to: "/about", text: "About" },
@@ -39,46 +43,53 @@ const Navbar = () => {
                                 key={item.to}
                                 to={item.to}
                                 onClick={closeMenu}
-                                className="relative px-3 py-2 text-gray-700 hover:text-blue-700 font-medium 
-                                transition-colors duration-300 group"
+                                className="relative px-4 py-2.5 text-gray-700 hover:text-blue-800 
+                                font-semibold uppercase tracking-wider text-sm
+                                transition-all duration-300 group"
                             >
                                 {item.text}
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 
-                                transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-600 
+                                transition-all duration-500 origin-center transform -translate-x-1/2
+                                group-hover:w-4/5"></span>
                             </Link>
                         ))}
                         <Link
                             to="/careers"
                             onClick={closeMenu}
-                            className="ml-4 px-6 py-2.5 bg-gradient-to-r from-blue-700 to-purple-600 
-                            text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-200/40
-                            transition-all duration-300 flex items-center border-2 border-white/20
-                            hover:border-transparent button-85"
+                            className="ml-4 px-8 py-3
+                            text-white rounded-full font-bold uppercase tracking-wider text-sm
+                            
+                            transition-all duration-500 hover:-translate-y-1
+                            hover:border-transparent
+                            relative overflow-hidden"
                         >
-                            Apply Now
+                            <span className="relative z-10">Apply Now</span>
+                            <span className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-20 
+                            transition-opacity duration-300"></span>
                         </Link>
                     </div>
 
-                    {/* Mobile Menu Button */}
+                    {/* Mobile Menu Button with animation */}
                     <div className="flex md:hidden">
                         <button
                             onClick={toggleMenu}
-                            className="p-2 text-gray-700 hover:text-blue-700 transition-colors"
+                            className="p-2 text-gray-700 hover:text-blue-800 transition-all duration-500"
                         >
                             {isOpen ? (
-                                <MdClear className="w-8 h-8" />
+                                <MdClear className="w-8 h-8 transform rotate-180 transition-transform duration-500" />
                             ) : (
-                                <GiHamburgerMenu className="w-8 h-8" />
+                                <GiHamburgerMenu className="w-8 h-8 transform hover:rotate-180 transition-transform duration-500" />
                             )}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu with slide animation */}
             {isOpen && (
-                <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-100">
-                    <div className="px-4 pt-2 pb-6 space-y-2">
+                <div className="md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-100 
+                animate-slideIn">
+                    <div className="px-4 pt-4 pb-8 space-y-3">
                         {[
                             { to: "/", text: "Home" },
                             { to: "/about", text: "About" },
@@ -92,8 +103,9 @@ const Navbar = () => {
                                 key={item.to}
                                 to={item.to}
                                 onClick={closeMenu}
-                                className="block px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg 
-                                transition-colors font-medium"
+                                className="block px-6 py-4 text-gray-700 hover:bg-blue-50 rounded-xl 
+                                transition-all duration-500 font-semibold uppercase tracking-wide text-sm
+                                hover:pl-8 hover:text-blue-800 border-b border-gray-100/50"
                             >
                                 {item.text}
                             </Link>
@@ -101,6 +113,23 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
+
+            {/* Add custom animation keyframes */}
+            <style>{`
+                @keyframes slideIn {
+                    0% {
+                        transform: translateY(-20px);
+                        opacity: 0;
+                    }
+                    100% {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+                .animate-slideIn {
+                    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+            `}</style>
         </nav>
     );
 };

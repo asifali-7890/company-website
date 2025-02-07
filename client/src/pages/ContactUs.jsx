@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TextField, Button, Container, Typography, Grid, Box, Alert } from '@mui/material';
 import { FaSpinner } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -12,15 +13,6 @@ const ContactUs = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [submissionStatus, setSubmissionStatus] = useState(null);
-
-    useEffect(() => {
-        if (submissionStatus === 'success') {
-            const timer = setTimeout(() => setSubmissionStatus(null), 5000);
-
-            return () => clearTimeout(timer); // Cleanup the timeout if the component unmounts or status changes
-        }
-    }, [submissionStatus]);
-
     const [validationErrors, setValidationErrors] = useState({
         fullName: '',
         email: '',
@@ -28,7 +20,12 @@ const ContactUs = () => {
         message: ''
     });
 
-
+    useEffect(() => {
+        if (submissionStatus === 'success') {
+            const timer = setTimeout(() => setSubmissionStatus(null), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [submissionStatus]);
 
     const validateField = (name, value) => {
         switch (name) {
@@ -55,8 +52,6 @@ const ContactUs = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-
-        // Validate field in real-time
         const error = validateField(name, value);
         setValidationErrors(prev => ({ ...prev, [name]: error }));
     };
@@ -65,6 +60,7 @@ const ContactUs = () => {
         return Object.values(validationErrors).every(err => err === '') &&
             Object.values(formData).every(field => field !== '');
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -93,128 +89,184 @@ const ContactUs = () => {
         }
     };
 
+
     return (
-        <Container maxWidth="sm" className='pb-4'>
-            <Box sx={{ padding: '2rem', borderRadius: '8px', boxShadow: 3, backgroundColor: '#fff' }}>
-                <Typography variant="h5" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-                    <span className='pt-12 block mb-5 text-3xl'>How can we help?</span>
-                    <span className="button-85" style={{ fontFamily: '"Roboto", sans-serif', fontSize: '1.50rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                        Contact Us
-                    </span>
-                </Typography>
+        <Container maxWidth="md" sx={{ py: 14 }}>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <Box sx={{
+                    padding: { xs: 3, sm: 6 },
+                    borderRadius: 4,
+                    boxShadow: '0 8px 32px rgba(31, 38, 135, 0.07)',
+                    backgroundColor: 'background.paper',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&:before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: 4,
+                        background: 'linear-gradient(90deg, #4F46E5 0%, #EC4899 100%)'
+                    }
+                }}>
+                    <Box textAlign="center" mb={5}>
+                        <Typography variant="h3" sx={{
+                            fontWeight: 700,
+                            color: 'text.primary',
+                            mb: 2,
+                            fontSize: { xs: '1.75rem', sm: '2.25rem' }
+                        }}>
+                            Get in Touch
+                        </Typography>
+                        <Typography variant="body1" sx={{
+                            color: 'text.secondary',
+                            maxWidth: 600,
+                            mx: 'auto',
+                            fontSize: '1rem'
+                        }}>
+                            Our team is ready to help you with any inquiries
+                        </Typography>
+                    </Box>
 
-                <form onSubmit={handleSubmit} className='pt-6'>
-                    <Grid container spacing={2}>
-                        {/* Full Name Field */}
-                        <Grid item xs={12}>
-                            <TextField fullWidth
-                                label="Full Name"
-                                variant="outlined"
-                                name="fullName"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                error={!!validationErrors.fullName}
-                                helperText={validationErrors.fullName}
-                                sx={{ borderRadius: '8px' }}
-                            />
-                        </Grid>
+                    <form onSubmit={handleSubmit}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    label="Full Name"
+                                    name="fullName"
+                                    value={formData.fullName}
+                                    onChange={handleChange}
+                                    error={!!validationErrors.fullName}
+                                    helperText={validationErrors.fullName}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: 2,
+                                            '& fieldset': { borderColor: '#E0E0E0' },
+                                            '&:hover fieldset': { borderColor: '#4F46E5' },
+                                        }
+                                    }}
+                                />
+                            </Grid>
 
-                        {/* Email Field */}
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Email"
-                                variant="outlined"
-                                name="email"
-                                type="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                error={!!validationErrors.email}
-                                helperText={validationErrors.email}
-                                sx={{ borderRadius: '8px' }}
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    fullWidth
+                                    label="Email"
+                                    name="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    error={!!validationErrors.email}
+                                    helperText={validationErrors.email}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: 2,
+                                            '& fieldset': { borderColor: '#E0E0E0' },
+                                            '&:hover fieldset': { borderColor: '#4F46E5' },
+                                        }
+                                    }}
+                                />
+                            </Grid>
 
-                        {/* Phone Number Field */}
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Phone Number"
-                                variant="outlined"
-                                name="phone"
-                                type="tel"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                error={!!validationErrors.phone}
-                                helperText={validationErrors.phone}
-                                sx={{ borderRadius: '8px' }}
-                            />
-                        </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField
+                                    fullWidth
+                                    label="Phone Number"
+                                    name="phone"
+                                    type="tel"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    error={!!validationErrors.phone}
+                                    helperText={validationErrors.phone}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: 2,
+                                            '& fieldset': { borderColor: '#E0E0E0' },
+                                            '&:hover fieldset': { borderColor: '#4F46E5' },
+                                        }
+                                    }}
+                                />
+                            </Grid>
 
-                        {/* Message Field */}
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Message"
-                                variant="outlined"
-                                name="message"
-                                multiline
-                                rows={4}
-                                value={formData.message}
-                                onChange={handleChange}
-                                error={!!validationErrors.message}
-                                helperText={validationErrors.message}
-                                sx={{ borderRadius: '8px' }}
-                            />
-                        </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    fullWidth
+                                    label="Message"
+                                    name="message"
+                                    multiline
+                                    rows={4}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    error={!!validationErrors.message}
+                                    helperText={validationErrors.message}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: 2,
+                                            '& fieldset': { borderColor: '#E0E0E0' },
+                                            '&:hover fieldset': { borderColor: '#4F46E5' },
+                                        }
+                                    }}
+                                />
+                            </Grid>
 
-                        <Grid container spacing={2}>
-                            {/* Submit Button */}
                             <Grid item xs={12}>
                                 <Button
                                     fullWidth
                                     variant="contained"
-                                    color="primary"
+                                    size="large"
                                     type="submit"
                                     disabled={isLoading || !isFormValid()}
                                     sx={{
-                                        padding: '1rem',
-                                        marginTop: '1rem',
-                                        fontWeight: 'bold',
-                                        borderRadius: '8px',
-                                        '&:hover': { backgroundColor: '#4CAF50' },
+                                        py: 2,
+                                        borderRadius: 2,
+                                        fontWeight: 600,
+                                        background: 'linear-gradient(90deg, #4F46E5 0%, #EC4899 100%)',
+                                        '&:hover': {
+                                            transform: 'translateY(-2px)',
+                                            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.3)'
+                                        },
+                                        transition: 'all 0.3s ease'
                                     }}
                                 >
                                     {isLoading ? (
-                                        <div className="flex items-center justify-center">
-                                            <FaSpinner className="animate-spin mr-2" /> Submitting...
-                                        </div>
+                                        <Box display="flex" alignItems="center">
+                                            <FaSpinner className="animate-spin" style={{ marginRight: 8 }} />
+                                            Submitting...
+                                        </Box>
                                     ) : (
-                                        "Submit"
+                                        'Send Message'
                                     )}
                                 </Button>
                             </Grid>
-                            {/* Success Message */}
-                            {/* {submissionStatus === 'success' && (
-                                <Grid item xs={12}>
-                                    <Alert severity="success" sx={{ mt: 1 }}>
-                                        Message sent successfully!
-                                    </Alert>
-                                </Grid>
-                            )} */}
 
-                            {/* Error Message */}
-                            {submissionStatus === 'error' && (
+                            {submissionStatus && (
                                 <Grid item xs={12}>
-                                    <Alert severity="error" sx={{ mt: 1 }}>
-                                        Failed to send message. Please try again.
+                                    <Alert
+                                        severity={submissionStatus}
+                                        sx={{
+                                            borderRadius: 2,
+                                            border: '1px solid',
+                                            borderColor: submissionStatus === 'success'
+                                                ? 'success.light'
+                                                : 'error.light'
+                                        }}
+                                    >
+                                        {submissionStatus === 'success'
+                                            ? 'Message sent successfully!'
+                                            : 'Failed to send message. Please try again.'}
                                     </Alert>
                                 </Grid>
                             )}
                         </Grid>
-                    </Grid>
-                </form>
-            </Box>
+                    </form>
+                </Box>
+            </motion.div>
         </Container>
     );
 };

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { BriefcaseIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-// import { useEffect } from 'react';
 import { FaSpinner } from 'react-icons/fa';
-
+import { Alert, Stack } from '@mui/material';
 
 const Careers = () => {
     const [formData, setFormData] = useState({
@@ -15,25 +15,26 @@ const Careers = () => {
         coverLetter: '',
     });
 
-
-
+    const [submissionStatus, setSubmissionStatus] = useState(null);
     const [validationErrors, setValidationErrors] = useState({
         fullName: '',
         email: '',
         phone: '',
         resume: '',
     });
+
+    useEffect(() => {
+        if (submissionStatus === 'success') {
+            const timer = setTimeout(() => setSubmissionStatus(null), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [submissionStatus]);
+
     const [agreed, setAgreed] = useState(false);
     const [subscribe, setSubscribe] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    // useEffect(() => {
-    //     if (isLoading === true) {
-    //         const timer = setTimeout(() => setIsLoading(null), 5000);
-
-    //         return () => clearTimeout(timer); // Cleanup the timeout if the component unmounts or status changes
-    //     }
-    // }, [isLoading]);
+    // Validation and submission logic remains the same
 
     const validateField = (name, value) => {
         switch (name) {
@@ -99,39 +100,40 @@ const Careers = () => {
             setValidationErrors({ fullName: '', email: '', phone: '', resume: '' });
             setAgreed(false);
             setSubscribe(false);
+            setSubmissionStatus('success');
         } catch (error) {
             console.error('Submission error:', error);
+            setSubmissionStatus('error');
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <section className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-20 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
+        <section className="min-h-screen bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    className="text-center mb-12"
                 >
-                    <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                        Join BlueNext Technologies
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Join Our Team
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Help us shape the future of digital innovation. Explore opportunities to grow your career with our dynamic team.
+                    <p className="text-gray-600 md:text-lg max-w-xl mx-auto">
+                        Help shape the future of digital innovation with BlueNext Technologies
                     </p>
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="bg-white rounded-2xl shadow-xl p-8 sm:p-12"
+                    className="bg-white rounded-xl shadow-sm p-6 sm:p-8 border border-gray-100"
                 >
-                    <h2 className="text-3xl font-bold text-gray-900 mb-8">Application Form</h2>
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">Application Form</h2>
 
-                    <form className="space-y-8" onSubmit={handleSubmit}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        <div className="grid grid-cols-1 gap-4 sm:gap-6">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Full Name
@@ -141,10 +143,9 @@ const Careers = () => {
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 rounded-lg border ${validationErrors.fullName ? 'border-red-500' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                                    required
+                                    className={`w-full px-4 py-2.5 rounded-lg border ${validationErrors.fullName ? 'border-red-300' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm`}
                                 />
-                                {validationErrors.fullName && <p className="text-red-500 text-sm">{validationErrors.fullName}</p>}
+                                {validationErrors.fullName && <p className="text-red-500 text-xs mt-1">{validationErrors.fullName}</p>}
                             </div>
 
                             <div>
@@ -156,10 +157,9 @@ const Careers = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 rounded-lg border ${validationErrors.email ? 'border-red-500' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                                    required
+                                    className={`w-full px-4 py-2.5 rounded-lg border ${validationErrors.email ? 'border-red-300' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm`}
                                 />
-                                {validationErrors.email && <p className="text-red-500 text-sm">{validationErrors.email}</p>}
+                                {validationErrors.email && <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>}
                             </div>
 
                             <div>
@@ -171,10 +171,9 @@ const Careers = () => {
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 rounded-lg border ${validationErrors.phone ? 'border-red-500' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                                    required
+                                    className={`w-full px-4 py-2.5 rounded-lg border ${validationErrors.phone ? 'border-red-300' : 'border-gray-200'} focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm`}
                                 />
-                                {validationErrors.phone && <p className="text-red-500 text -sm">{validationErrors.phone}</p>}
+                                {validationErrors.phone && <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>}
                             </div>
 
                             <div>
@@ -185,65 +184,55 @@ const Careers = () => {
                                     type="file"
                                     name="resume"
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 rounded-lg border ${validationErrors.resume ? 'border-red-500' : 'border-gray-200'} file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100`}
+                                    className={`w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 ${validationErrors.resume ? 'border-red-300' : 'border-gray-200'}`}
                                     accept=".pdf,.doc,.docx"
-                                    required
                                 />
-                                {validationErrors.resume && <p className="text-red-500 text-sm">{validationErrors.resume}</p>}
+                                {validationErrors.resume && <p className="text-red-500 text-xs mt-1">{validationErrors.resume}</p>}
                             </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Cover Letter
-                            </label>
-                            <textarea
-                                rows="5"
-                                name="coverLetter"
-                                value={formData.coverLetter}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Tell us why you'd be a great fit..."
-                            ></textarea>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Cover Letter
+                                </label>
+                                <textarea
+                                    rows="4"
+                                    name="coverLetter"
+                                    value={formData.coverLetter}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                    placeholder="Tell us why you're a great fit..."
+                                ></textarea>
+                            </div>
                         </div>
 
                         <div className="space-y-4">
                             <div className="flex items-start">
-                                <div className="flex items-center h-5">
-                                    <input
-                                        id="privacy-policy"
-                                        type="checkbox"
-                                        checked={agreed}
-                                        onChange={(e) => setAgreed(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                        required
-                                    />
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label htmlFor="privacy-policy" className="text-gray-700">
-                                        I have read and agree to the{' '}
-                                        <Link to="/privacypolicy" className="text-blue-600 hover:underline">
-                                            Privacy Policy
-                                        </Link>
-                                    </label>
-                                </div>
+                                <input
+                                    id="privacy-policy"
+                                    type="checkbox"
+                                    checked={agreed}
+                                    onChange={(e) => setAgreed(e.target.checked)}
+                                    className="w-4 h-4 text-blue-600 border-gray-300 rounded mt-1 focus:ring-blue-500"
+                                />
+                                <label htmlFor="privacy-policy" className="ml-3 text-sm text-gray-600">
+                                    I agree to the{' '}
+                                    <Link to="/privacypolicy" className="text-blue-600 hover:underline">
+                                        Privacy Policy
+                                    </Link>
+                                </label>
                             </div>
 
                             <div className="flex items-start">
-                                <div className="flex items-center h-5">
-                                    <input
-                                        id="newsletter"
-                                        type="checkbox"
-                                        checked={subscribe}
-                                        onChange={(e) => setSubscribe(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                    />
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label htmlFor="newsletter" className="text-gray-700">
-                                        Subscribe to our monthly newsletter
-                                    </label>
-                                </div>
+                                <input
+                                    id="newsletter"
+                                    type="checkbox"
+                                    checked={subscribe}
+                                    onChange={(e) => setSubscribe(e.target.checked)}
+                                    className="w-4 h-4 text-blue-600 border-gray-300 rounded mt-1 focus:ring-blue-500"
+                                />
+                                <label htmlFor="newsletter" className="ml-3 text-sm text-gray-600">
+                                    Subscribe to our newsletter
+                                </label>
                             </div>
                         </div>
 
@@ -252,41 +241,43 @@ const Careers = () => {
                             whileTap={{ scale: 0.98 }}
                             type="submit"
                             disabled={!agreed || !isFormValid()}
-                            className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all ${agreed && isFormValid()
+                            className={`w-full py-3 px-6 rounded-lg font-medium text-sm transition-all ${agreed && isFormValid()
                                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg'
                                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                 }`}
                         >
                             {isLoading ? (
                                 <div className="flex items-center justify-center">
-                                    <FaSpinner className="animate-spin mr-2" /> Processing...
+                                    <FaSpinner className="animate-spin mr-2" />
+                                    Submitting...
                                 </div>
                             ) : (
                                 <span className="flex items-center justify-center">
-                                    <BriefcaseIcon className="w-6 h-6 mr-2" />
+                                    <BriefcaseIcon className="w-5 h-5 mr-2" />
                                     Submit Application
                                 </span>
                             )}
-
                         </motion.button>
-                        {/* {isLoading && (
-                            <div
-                                style={{
-                                    marginTop: '1rem',
-                                    padding: '1rem',
-                                    backgroundColor: '#d4edda',
-                                    color: '#155724',
-                                    borderRadius: '8px',
-                                    textAlign: 'center'
-                                }}
-                            >
-                                Message sent successfully!
-                            </div>)} */}
+                        {submissionStatus && (
+                            <Stack spacing={2} sx={{ mt: 3 }}>
+                                <Alert
+                                    severity={submissionStatus}
+                                    variant="filled"  // 'filled' gives a more modern look
+                                    sx={{ borderRadius: 2 }}
+                                >
+                                    {submissionStatus === 'success'
+                                        ? 'Message sent successfully!'
+                                        : 'Failed to send message. Please try again.'}
+                                </Alert>
+                            </Stack>
+                        )}
+
                     </form>
                 </motion.div>
 
-                <div className="mt-12 text-center text-gray-600">
-                    <p>Have questions? Email us at{' '}
+                <div className="mt-8 text-center text-sm text-gray-600">
+                    <p>
+                        Questions?{' '}
                         <a href="mailto:careers@bluenexttech.com" className="text-blue-600 hover:underline">
                             careers@bluenexttech.com
                         </a>
