@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Contact from './models/contact.model.js';
 import CareerRouter from './routes/careers.route.js';
+import ContactRouter from './routes/contact.route.js';
 
 dotenv.config();
 
@@ -29,35 +30,36 @@ mongoose.connect(MONGODB_URI, {
 // });
 
 app.use('/api', CareerRouter)
+app.use('/api/contact', ContactRouter)
 
 // app.get('/api/career/test', (req, res) => {
 //     res.send('Test route working in index');
 // })
 
 
-app.post('/api/contact', async (req, res) => {
-    try {
-        const { fullName, email, phone, message } = req.body;
+// app.post('/api/contact', async (req, res) => {
+//     try {
+//         const { fullName, email, phone, message } = req.body;
 
-        const newContact = await Contact.create({
-            fullName,
-            email,
-            phone,
-            message
-        });
+//         const newContact = await Contact.create({
+//             fullName,
+//             email,
+//             phone,
+//             message
+//         });
 
-        res.status(201).json({
-            success: true,
-            data: newContact
-        });
+//         res.status(201).json({
+//             success: true,
+//             data: newContact
+//         });
 
-    } catch (error) {
-        res.status(400).json({
-            success: false,
-            error: error.message
-        });
-    }
-});
+//     } catch (error) {
+//         res.status(400).json({
+//             success: false,
+//             error: error.message
+//         });
+//     }
+// });
 
 
 

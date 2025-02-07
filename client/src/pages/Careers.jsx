@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BriefcaseIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
+import { FaSpinner } from 'react-icons/fa';
+
 
 const Careers = () => {
     const [formData, setFormData] = useState({
@@ -25,13 +27,13 @@ const Careers = () => {
     const [subscribe, setSubscribe] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        if (isLoading === true) {
-            const timer = setTimeout(() => setIsLoading(null), 5000);
+    // useEffect(() => {
+    //     if (isLoading === true) {
+    //         const timer = setTimeout(() => setIsLoading(null), 5000);
 
-            return () => clearTimeout(timer); // Cleanup the timeout if the component unmounts or status changes
-        }
-    }, [isLoading]);
+    //         return () => clearTimeout(timer); // Cleanup the timeout if the component unmounts or status changes
+    //     }
+    // }, [isLoading]);
 
     const validateField = (name, value) => {
         switch (name) {
@@ -255,10 +257,19 @@ const Careers = () => {
                                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                 }`}
                         >
-                            <BriefcaseIcon className="w-6 h-6 mr-2 inline-block" />
-                            Submit Application
+                            {isLoading ? (
+                                <div className="flex items-center justify-center">
+                                    <FaSpinner className="animate-spin mr-2" /> Processing...
+                                </div>
+                            ) : (
+                                <span className="flex items-center justify-center">
+                                    <BriefcaseIcon className="w-6 h-6 mr-2" />
+                                    Submit Application
+                                </span>
+                            )}
+
                         </motion.button>
-                        {isLoading && (
+                        {/* {isLoading && (
                             <div
                                 style={{
                                     marginTop: '1rem',
@@ -270,7 +281,7 @@ const Careers = () => {
                                 }}
                             >
                                 Message sent successfully!
-                            </div>)}
+                            </div>)} */}
                     </form>
                 </motion.div>
 

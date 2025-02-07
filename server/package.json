@@ -9,10 +9,12 @@
         "dev": "nodemon index.js"
     },
     "dependencies": {
+        "cloudinary": "^2.5.1",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "mongoose": "^5.13.23",
         "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.10.0",
         "nodemon": "^3.1.9",
         "validator": "^13.12.0"
     }

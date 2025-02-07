@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TextField, Button, Container, Typography, Grid, Box, Alert } from '@mui/material';
+import { FaSpinner } from 'react-icons/fa';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -184,18 +185,23 @@ const ContactUs = () => {
                                         '&:hover': { backgroundColor: '#4CAF50' },
                                     }}
                                 >
-                                    {isLoading ? 'Submitting...' : 'Submit'}
+                                    {isLoading ? (
+                                        <div className="flex items-center justify-center">
+                                            <FaSpinner className="animate-spin mr-2" /> Submitting...
+                                        </div>
+                                    ) : (
+                                        "Submit"
+                                    )}
                                 </Button>
                             </Grid>
-
                             {/* Success Message */}
-                            {submissionStatus === 'success' && (
+                            {/* {submissionStatus === 'success' && (
                                 <Grid item xs={12}>
                                     <Alert severity="success" sx={{ mt: 1 }}>
                                         Message sent successfully!
                                     </Alert>
                                 </Grid>
-                            )}
+                            )} */}
 
                             {/* Error Message */}
                             {submissionStatus === 'error' && (
