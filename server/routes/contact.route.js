@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 
         // Use the transporter to send the email
         await transporter.sendMail(mailOptions);
-        console.log('Contact confirmation email sent successfully.');
+        // console.log('Contact confirmation email sent successfully.');
 
 
         res.status(201).json({
@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
 
 
 router.get('/asif', (req, res) => {
-    console.log('Contact test route working');
+    // console.log('Contact test route working');
     res.send('Contact integration working');
 });
 

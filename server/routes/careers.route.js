@@ -57,7 +57,7 @@ const streamUpload = (buffer) => {
 
 // POST route for submitting a career application
 router.post('/career', upload.single('resume'), async (req, res) => {
-    console.log('Form submission successfully done...');
+    // console.log('Form submission successfully done...');
     try {
         const { fullName, email, phone, coverLetter, subscribe } = req.body;
         if (!req.file) {
@@ -65,7 +65,7 @@ router.post('/career', upload.single('resume'), async (req, res) => {
         }
 
         // Upload PDF to Cloudinary using the streamUpload helper
-        console.log('Uploading PDF', req.file.buffer);
+        // console.log('Uploading PDF', req.file.buffer);
         const result = await streamUpload(req.file.buffer);
 
         // Ensure that result.secure_url is available
@@ -104,7 +104,7 @@ router.post('/career', upload.single('resume'), async (req, res) => {
 
         // Use the transporter to send the email
         await transporter.sendMail(mailOptions);
-        console.log('Confirmation email sent successfully.');
+        // console.log('Confirmation email sent successfully.');
 
         res.status(201).json({ data: newApplication, message: 'Application submitted successfully!' });
     } catch (error) {
@@ -116,7 +116,7 @@ router.post('/career', upload.single('resume'), async (req, res) => {
 
 // Test route
 router.get('/asif', (req, res) => {
-    console.log('Cloudinary test route working');
+    // console.log('Cloudinary test route working');
     res.send('Cloudinary integration working');
 });
 

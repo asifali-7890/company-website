@@ -77,7 +77,7 @@ const ContactUs = () => {
             if (!response.ok) throw new Error('Submission failed');
 
             // Reset form on success
-            console.log('response', (await response.json()).data);
+            // console.log('response', (await response.json()).data);
             setFormData({ fullName: '', email: '', phone: '', message: '' });
             setValidationErrors({ fullName: '', email: '', phone: '', message: '' });
             setSubmissionStatus('success');

@@ -95,7 +95,7 @@ const Careers = () => {
             if (!response.ok) throw new Error('Submission failed');
 
             // Reset form on success
-            console.log('Submission successful', (await response.json()).data);
+            // console.log('Submission successful', (await response.json()).data);
             setFormData({ fullName: '', email: '', phone: '', resume: null, coverLetter: '' });
             setValidationErrors({ fullName: '', email: '', phone: '', resume: '' });
             setAgreed(false);
