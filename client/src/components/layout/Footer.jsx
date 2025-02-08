@@ -13,10 +13,22 @@ const Footer = () => {
                         <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
                             About Us
                         </Typography>
-                        <Typography variant="body2" sx={{ mt: 1, color: 'gray.400' }}>
-                            BlueNext Technologies is dedicated to providing innovative digital solutions that help businesses thrive in the online world.
+                        <Typography
+                            variant="body2"
+                            sx={{ mt: 1, color: 'gray.400', lineHeight: 1.6 }}
+                        >
+                            BlueNext Technologies is dedicated to providing innovative digital solutions that help businesses thrive in the online world. Established in 2018, our company has built its foundation on excellence and forward-thinking innovation.
+                            <br /><br />
+                            We take immense pride in our heritage and the visionary leadership of our esteemed founder and owner,{' '}
+                            <strong style={{ fontWeight: 700, color: '#fff', fontSize: '1rem' }}>
+                                His Excellency Mr. Asif Ali
+                            </strong>.
+                            <br /><br />
+                            His unwavering commitment and exemplary expertise have guided BlueNext Technologies to become a trusted leader in digital innovation.
                         </Typography>
                     </Grid>
+
+
 
                     {/* Quick Links Section */}
                     <Grid item xs={12} md={4}>
@@ -44,7 +56,7 @@ const Footer = () => {
                             <Link href="https://www.twitter.com" target="_blank" color="inherit">
                                 <Twitter />
                             </Link>
-                            <Link href="https://www.linkedin.com" target="_blank" color="inherit">
+                            <Link href="https://www.linkedin.com/in/AsifAliQuraishy" target="_blank" color="inherit">
                                 <LinkedIn />
                             </Link>
                             <Link href="https://www.instagram.com" target="_blank" color="inherit">

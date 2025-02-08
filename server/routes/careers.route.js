@@ -98,7 +98,8 @@ router.post('/career', upload.single('resume'), async (req, res) => {
             Best regards,
             BlueNext Technologies Team`, // plain text body
             html: `<p>Hi ${fullName},</p>
-                <p>Thank you for applying to <strong>BlueNext Technologies</strong>. We have received your application and will review it shortly.</p>
+            <p>Thank you for applying to <strong>BlueNext Technologies</strong>. We have received your application and will review it shortly.</p>
+            <p><strong>Your Coverletter:</strong><br/>"${coverLetter}"</p>
                <p>Best regards,<br/>BlueNext Technologies Team</p>` // HTML body (optional)
         };
 
