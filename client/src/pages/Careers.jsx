@@ -95,7 +95,7 @@ const Careers = () => {
                         align="center"
                         sx={{ fontWeight: 'bold', color: 'text.primary', mb: 2 }}
                     >
-                        Join Our Team
+                        Join Our Organization
                     </Typography>
                     <Typography
                         variant="subtitle1"
