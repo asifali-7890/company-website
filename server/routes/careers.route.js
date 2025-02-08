@@ -1,29 +1,31 @@
 import express from 'express';
 import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
+// import { v2 as cloudinary } from 'cloudinary';
 import CareerApplication from '../models/careers.model.js'; // Adjust the path as necessary
 import fs from 'fs';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+import cloudinary from '../cloud/cloudinaryConfig.js';
 
+dotenv.config();
 const router = express.Router();
-
 
 // Configure transporter (example using Gmail)
 const transporter = nodemailer.createTransport({
     service: 'gmail', // or use the SMTP settings of your provider
     auth: {
-        user: 'gufraanquraishi@gmail.com',   // your email address (store in environment variables)
-        pass: 'yqylsnfnlmfufbsi'    // your email password or app password
+        user: process.env.MY_EMAIL,   // your email address (store in environment variables)
+        pass: process.env.MY_PASSWORD    // your email password or app password
     }
 });
 
 
 // Configure Cloudinary with credentials
-cloudinary.config({
-    cloud_name: 'dqyo06eyy',
-    api_key: '929756447444613',
-    api_secret: '4dNACZUn_su6RtoreYNY4bGnma0'
-});
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET
+// });
 
 
 
@@ -110,7 +112,7 @@ router.post('/career', upload.single('resume'), async (req, res) => {
         res.status(201).json({ data: newApplication, message: 'Application submitted successfully!' });
     } catch (error) {
         console.error('Error submitting application:', error);
-        res.status(500).json({ message: 'Failed to submit application.' });
+        res.status(500).json({ message: 'Failed to submit application.' + error.message });
     }
 });
 

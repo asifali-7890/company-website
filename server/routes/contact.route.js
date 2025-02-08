@@ -1,6 +1,9 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import Contact from '../models/contact.model.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -8,8 +11,8 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
     service: 'gmail', // or use the SMTP settings of your provider
     auth: {
-        user: 'gufraanquraishi@gmail.com',   // your email address (store in environment variables)
-        pass: 'yqylsnfnlmfufbsi'    // your email password or app password
+        user: process.env.MY_EMAIL,   // your email address (store in environment variables)
+        pass: process.env.MY_PASSWORD    // your email password or app password
     }
 });
 

@@ -195,7 +195,7 @@ const Careers = () => {
                                                         </Typography>
                                                     ) : (
                                                         <Typography variant="body2">
-                                                            Drag & drop a file here, or click to select one
+                                                            Drag & drop a file here, or click to select one <span className="font-bold text-md">(MAX 10 MB)</span>
                                                         </Typography>
                                                     )}
                                                 </DropzoneContainer>
